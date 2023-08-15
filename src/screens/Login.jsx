@@ -8,10 +8,10 @@ export default function Login() {
     email: "", password: ""
   });
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    const response = await fetch("http://localhost:5000/api/login", {
+    const response = await fetch("http://localhost:5000/api/loginuser", {
       method: "POST",
       headers: {
         'Content-Type': "application/json",
@@ -22,7 +22,6 @@ export default function Login() {
       })
     });
     const json = await response.json();
-    console.log(json);
 
     if (!json.success) {
       alert('Enter a valid Credentials');

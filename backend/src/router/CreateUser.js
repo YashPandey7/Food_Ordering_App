@@ -1,60 +1,42 @@
 const express = require("express");
 const router = new express.Router();
 const User = require("../models/Usermodel");
-const {body, validationResult} = require("express-validator");
 
-router.post("/createuser",
-[body('email', "Incorrect Email").isEmail(),
-body('name').isLength({min:3}),
-body("password", "Incorrect Password").isLength({min : 5})]
-,async(req, res) => {
-
-    const errors = validationResult(req);
-    if(!errors.isEmpty()){
-        return res.status(400).json({ errors: errors.array() });
-    }
-
+router.post("/createuser", async(req, res) => {
     try{
-        await User.create({
+        const signup = new User({
             name : req.body.name,
             password : req.body.password,
             email: req.body.email,
             location : req.body.location
         });
+
+        const register = await signup.save();
         res.json({success: true});
     }catch(err){
-        console.log(`Error in creating user: ${err}`);
-        res.json({success: false});
+        res.status(400).json({success: false});
     }
 });
 
 
-router.post("/login",
-[body('email', "Incorrect Email").isEmail(),
-body("password", "Incorrect Password").isLength({min : 5})],
- async(req, res) => {
+router.post("/loginuser", async(req, res) => {
 
-    const errors = validationResult(req);
-    if(!errors.isEmpty()){
-        return res.status(400).json({ errors: errors.array() });
-    }
-
+    const email = req.body.email;
     try{
-        const userData = await User.findOne(req.body.email);
+        const userData = await User.findOne({email});
         if(!userData){
-            return res.status(400).json({errors : "Invalid Credentials"});
+            return res.status(400).json({success: false});
         }
 
         if(req.body.password !== userData.password){
-            return res.status(400).json({errors : "Invalid Credentials"});
+            return res.status(400).json({success : false});
         }
         
-        return res.json({success: true});
+        return res.status(200).json({success: true});
 
 
     }catch(err){
-        console.log(`Error in creating user: ${err}`);
-        res.json({success: false});
+        res.status(404).json({success: false});
     }
 });
 
