@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 
 export default function Login() {
@@ -7,6 +7,8 @@ export default function Login() {
   const [credentials, setcredentials] = useState({
     email: "", password: ""
   });
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,6 +28,13 @@ export default function Login() {
     if (!json.success) {
       alert('Enter a valid Credentials');
     }
+
+    if (json.success) {
+      localStorage.setItem("authToken", json.authToken);
+      console.log(localStorage.getItem("authToken"));
+      navigate("/");
+    }
+
   }
 
   const onChange = (event) => {
