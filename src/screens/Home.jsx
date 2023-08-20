@@ -89,9 +89,10 @@ export default function Home() {
                                             return (
                                                 <div key={filterItems._id} className='col-12 col-md-6 col-lg-3'>
                                                     <Card 
-                                                    foodname = {filterItems.name} 
+                                                    // foodname = {filterItems.name} 
+                                                    foodItems = {filterItems}
                                                     options = {filterItems.options[0]}
-                                                    imgSrc = {filterItems.img}
+                                                    // imgSrc = {filterItems.img}
                                                     />
                                                 </div>
                                             )
