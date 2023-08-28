@@ -18,7 +18,7 @@ export default function Cart() {
         let response = await fetch("http://localhost:5000/api/orderData", {
             method: 'POST',
             headers: {
-                "Content-Type": "application/json"
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 order_data: data,
@@ -66,6 +66,8 @@ export default function Cart() {
                         ))}
                     </tbody>
                 </table>
+
+                <div><h1 className='fs-2'>Total Price: {totalPrice}/-</h1></div>
 
                 <div>
                     <button className="btn btn-success mt-5" onClick={handleCheckOut}>Check Out</button>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 
 const Signup = () => {
@@ -7,6 +7,8 @@ const Signup = () => {
     const [credentials, setcredentials] = useState({
         name: "", email: "", password: "", location: ""
     });
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -28,6 +30,9 @@ const Signup = () => {
 
         if (!json.success) {
             alert('Enter a valid Credentials');
+        }
+        if(json.success){
+            navigate("/loginuser");
         }
     }
 

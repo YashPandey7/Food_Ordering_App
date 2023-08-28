@@ -4,11 +4,11 @@ const OrderSchema = new mongoose.Schema({
     email : {
         type : String, 
         required : true,
-        unique : true,
+        unique : true
     },
     order_data: {
         type: Array,
-        required:true,
+        required:true
     },
 });
 
