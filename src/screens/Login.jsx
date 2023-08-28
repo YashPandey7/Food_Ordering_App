@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 
@@ -47,26 +47,28 @@ export default function Login() {
 
   return (
     <>
+      
+        <div>
+          <Navbar />
+        </div>
+        <br></br>
+        <div className="container">
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
+              <input type="email" className="form-control" name="email" value={credentials.email} onChange={onChange} />
+              <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+            </div>
 
-      <Navbar /><br></br>
-      <div className="container">
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-            <input type="email" className="form-control" name="email" value={credentials.email} onChange={onChange} />
-            <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
-          </div>
+            <div className="mb-3">
+              <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
+              <input type="password" className="form-control" name="password" value={credentials.password} onChange={onChange} />
+            </div>
 
-          <div className="mb-3">
-            <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-            <input type="password" className="form-control" name="password" value={credentials.password} onChange={onChange} />
-          </div>
-
-          <button type="submit" className="m-3 btn btn-success">Submit</button>
-          <Link to="/createuser" className="m-3 btn btn-danger">New user</Link>
-        </form>
-      </div>
-
+            <button type="submit" className="m-3 btn btn-success">Submit</button>
+            <Link to="/createuser" className="m-3 btn btn-danger">New user</Link>
+          </form>
+        </div>
     </>
   )
 }
